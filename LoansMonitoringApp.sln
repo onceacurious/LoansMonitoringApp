@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoansMonitoring.API", "LoansMonitoring.API\LoansMonitoring.API.csproj", "{2E7D12E9-12BB-4C93-9967-9FBFBD4D72CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoansMonitoring.ClassLib", "LoansMonitoring.ClassLib\LoansMonitoring.ClassLib.csproj", "{B3C15997-ED44-4D51-88D9-8DB94666CDEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E7D12E9-12BB-4C93-9967-9FBFBD4D72CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E7D12E9-12BB-4C93-9967-9FBFBD4D72CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E7D12E9-12BB-4C93-9967-9FBFBD4D72CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E7D12E9-12BB-4C93-9967-9FBFBD4D72CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C15997-ED44-4D51-88D9-8DB94666CDEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C15997-ED44-4D51-88D9-8DB94666CDEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C15997-ED44-4D51-88D9-8DB94666CDEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C15997-ED44-4D51-88D9-8DB94666CDEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C456E90E-306D-4B85-B954-9DF28924F44C}
+	EndGlobalSection
+EndGlobal
