@@ -1,5 +1,5 @@
 ﻿namespace LoansMonitoring.ClassLib.Models;
 
-public class LoanModel
+public class LoanApplication
 {
 }

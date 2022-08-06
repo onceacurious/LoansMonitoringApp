@@ -9,5 +9,13 @@ public static class RegisterServices
       // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
       builder.Services.AddEndpointsApiExplorer();
       builder.Services.AddSwaggerGen();
+
+      // User Code
+      builder.Services.AddMemoryCache();
+      builder.Services.AddDbContextPool<DbConnection>(options =>
+      options.UseSqlServer(builder.Configuration.GetConnectionString("DevConn"))
+      );
+      builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+      builder.Services.AddScoped<IProductRepository, ProductRepository>();
    }
 }
