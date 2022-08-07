@@ -1,4 +1,5 @@
 ﻿using LoansMonitoring.ClassLib.DTOs.Category;
+using LoansMonitoring.ClassLib.DTOs.Client;
 using LoansMonitoring.ClassLib.DTOs.Product;
 
 namespace LoansMonitoring.ClassLib.Extensions;
@@ -35,13 +36,25 @@ public static class DtosConvertion
 
    }
 
-   public static ProductDto AsReadProductDto(this Product obj)
+   public static ProductDto AsProductDto(this Product obj)
    {
       return new ProductDto
       {
          Id = obj.Id,
          Name = obj.Name,
          Description = obj.Description
+      };
+   }
+
+   public static ClientDto AsClientDto(this Client obj)
+   {
+      return new ClientDto
+      {
+         Id = obj.Id,
+         FullName = obj.FullName,
+         LastName = obj.LastName,
+         FirstName = obj.FirstName,
+         MiddleName = obj.MiddleName
       };
    }
 

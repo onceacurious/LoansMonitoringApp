@@ -18,7 +18,7 @@ public class ProductController : ControllerBase
       try
       {
          var products = (await _repository.GetProducts())
-            .Select(p => p.AsReadProductDto());
+            .Select(p => p.AsProductDto());
 
          if (products == null)
          {
@@ -47,7 +47,7 @@ public class ProductController : ControllerBase
          }
          else
          {
-            return Ok(product.AsReadProductDto());
+            return Ok(product.AsProductDto());
          }
       }
       catch (Exception)

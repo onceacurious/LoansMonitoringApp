@@ -5,7 +5,7 @@ public class ProductCategory
 {
    public int Id { get; set; }
    public Product Product { get; set; } = null!;
-   [DisplayName("Category Name")]
+   [Display(Name = "Category Name")]
    [MaxLength(20)]
    public string Name { get; set; } = null!;
    [MaxLength(150)]
