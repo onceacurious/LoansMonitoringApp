@@ -5,13 +5,10 @@ public class DbConnection : DbContext
    {
 
    }
-
-   public DbSet<Product> Products { get; set; }
-   public DbSet<ProductCategory> ProductCategories { get; set; }
    public DbSet<Client> Clients { get; set; }
-   public DbSet<LoanApplication> LoanApplications { get; set; }
    public DbSet<Receiver> Receivers { get; set; }
    public DbSet<Status> Statuses { get; set; }
-   public DbSet<TransactionType> TransactionTypes { get; set; }
+   public DbSet<Loan> Loans { get; set; }
+   public DbSet<Product> Products { get; set; }
 
 }

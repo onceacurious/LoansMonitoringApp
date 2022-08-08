@@ -17,8 +17,7 @@ public static class RegisterServices
       );
 
       // Repositories
-      builder.Services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
-      builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
       builder.Services.AddScoped<IClientRepository, ClientRepository>();
    }
 }

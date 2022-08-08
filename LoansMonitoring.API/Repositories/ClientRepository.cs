@@ -1,4 +1,6 @@
-﻿namespace LoansMonitoring.API.Repositories;
+﻿using LoansMonitoring.ClassLib.DTOs.Client;
+
+namespace LoansMonitoring.API.Repositories;
 
 public class ClientRepository : IClientRepository
 {
@@ -18,23 +20,32 @@ public class ClientRepository : IClientRepository
    {
       var result = await _connection.Clients.SingleOrDefaultAsync(c => c.Id == id);
       return result;
-   }
-   public Task<Client> UpdateClient(int id)
-   {
-      throw new NotImplementedException();
-   }
-   public Task<Client> DeleteClient(int id)
-   {
-      //try
-      //{
 
-      //}
-      //catch (Exception)
-      //{
+   }
+   public async Task<Client> UpdateClient(int id, ClientUpdateDto dto)
+   {
+      var client = await _connection.Clients.FindAsync(id);
+      if (client != null)
+      {
+         client.FirstName = dto.FirstName;
+         client.LastName = dto.LastName;
+         client.MiddleName = dto.MiddleName;
+         await _connection.SaveChangesAsync();
+         return client;
+      }
+      return null;
 
-      //   throw;
-      //}
-      throw new NotImplementedException();
+
+   }
+   public async Task<Client> DeleteClient(int id)
+   {
+      var client = await _connection.Clients.FindAsync(id);
+      if (client != null)
+      {
+         _connection.Clients.Remove(client);
+         await _connection.SaveChangesAsync();
+      }
+      return null;
    }
 
    public async Task<Client> AddClient(Client client)

@@ -56,4 +56,43 @@ public class ClientController : ControllerBase
       await _repository.AddClient(client);
       return CreatedAtAction(nameof(GetClient), new { id = client.Id }, client.AsClientDto());
    }
+   [HttpPatch("{id:int}")]
+   public async Task<ActionResult<ClientDto>> UpdateClient(int id, ClientUpdateDto dto)
+   {
+      try
+      {
+         var client = await _repository.UpdateClient(id, dto);
+         if (client == null)
+         {
+            return NotFound();
+         }
+         else
+         {
+            var result = client.AsClientDto();
+            return Ok(result);
+         }
+      }
+      catch (Exception ex)
+      {
+         return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+      }
+   }
+   [HttpDelete("{id:int}")]
+   public async Task<ActionResult<ClientDto>> DeleteClient(int id)
+   {
+      try
+      {
+         var client = await _repository.DeleteClient(id);
+         if (client == null)
+         {
+            return NotFound();
+         }
+         var result = client.AsClientDto();
+         return result;
+      }
+      catch (Exception ex)
+      {
+         return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+      }
+   }
 }

@@ -1,12 +1,10 @@
 ﻿namespace LoansMonitoring.ClassLib.Models;
 
-public class LoanApplication
+public class Application
 {
    public int Id { get; set; }
    [Required]
    public Client Client { get; set; } = null!;
-   [Required]
-   public Product Product { get; set; } = null!;
    [Required]
    public TransactionType TransactionType { get; set; } = null!;
    [Required]
@@ -14,7 +12,7 @@ public class LoanApplication
    [Required]
    public DateTime StatusTimestamp { get; set; } = DateTime.UtcNow;
    [MaxLength(150)]
-   public string? StatusNotes { get; set; }
+   public string StatusNotes { get; set; } = string.Empty;
    [Required]
    public DateTime DateReceived { get; set; }
    [Required]

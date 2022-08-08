@@ -1,13 +1,9 @@
-﻿
-
-namespace LoansMonitoring.ClassLib.Models;
+﻿namespace LoansMonitoring.ClassLib.Models;
 public class Product
 {
    public int Id { get; set; }
-   [DisplayName("Product Name")]
-   [MaxLength(20)]
    public string Name { get; set; } = null!;
-   [MaxLength(150)]
-   public string? Description { get; set; }
-
+   public string Descirption { get; set; } = string.Empty;
+   public Loan Loan { get; set; } = null!;
+   public int LoanId { get; set; }
 }
