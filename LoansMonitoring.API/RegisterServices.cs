@@ -18,6 +18,6 @@ public static class RegisterServices
 
       // Repositories
 
-      builder.Services.AddScoped<IClientRepository, ClientRepository>();
+      //builder.Services.AddScoped<IClientRepository, ClientRepository>();
    }
 }

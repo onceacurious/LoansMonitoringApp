@@ -1,11 +1,8 @@
 ﻿namespace LoansMonitoring.ClassLib.DTOs.LoanApplication;
-public class LoanApplicationDto
+public class ApplicationAddDto
 {
-   public int Id { get; set; }
    [Required]
    public int ClientId { get; set; }
-   [Required]
-   public string FullName { get; set; } = null!;
    [Required]
    public int ProductId { get; set; }
    [Required]

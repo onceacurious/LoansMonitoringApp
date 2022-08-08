@@ -1,5 +1,5 @@
 ﻿namespace LoansMonitoring.ClassLib.DTOs.LoanApplication;
-public class LoanApplicationUpdateDto
+public class ApplicationUpdateDto
 {
    public int Id { get; set; }
    [Required]
