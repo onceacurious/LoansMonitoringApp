@@ -1,4 +1,5 @@
 ﻿using LoansMonitoring.ClassLib.DTOs.Client;
+using LoansMonitoring.ClassLib.DTOs.Loan;
 
 namespace LoansMonitoring.ClassLib.Extensions;
 public static class DtosConvertion
@@ -54,6 +55,15 @@ public static class DtosConvertion
    //   };
    //}
 
+   public static LoanDto AsLoanDto(this Loan obj)
+   {
+      return new LoanDto
+      {
+         Id = obj.Id,
+         Name = obj.Name,
+         Description = obj.Description
+      };
+   }
    public static ClientDto AsClientDto(this Client obj)
    {
       return new ClientDto

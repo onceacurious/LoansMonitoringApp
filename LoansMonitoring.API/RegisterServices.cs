@@ -1,4 +1,7 @@
-﻿namespace LoansMonitoring.API;
+﻿using LoansMonitoring.API.Repositories;
+using LoansMonitoring.API.Repositories.Contracts;
+
+namespace LoansMonitoring.API;
 
 public static class RegisterServices
 {
@@ -17,7 +20,7 @@ public static class RegisterServices
       );
 
       // Repositories
-
+      builder.Services.AddScoped<ILoanRepository, LoanRepository>();
       //builder.Services.AddScoped<IClientRepository, ClientRepository>();
    }
 }
