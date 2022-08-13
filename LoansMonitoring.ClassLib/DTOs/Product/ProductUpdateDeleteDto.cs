@@ -1,10 +1,6 @@
-﻿using System.Text.Json.Serialization;
-
-namespace LoansMonitoring.ClassLib.Models;
-public class Product
+﻿namespace LoansMonitoring.ClassLib.DTOs.Product;
+public class ProductUpdateDeleteDto
 {
-   public int Id { get; set; }
-
    [Required]
    [MaxLength(20, ErrorMessage = "Name too long")]
    public string Name { get; set; } = null!;
@@ -12,8 +8,6 @@ public class Product
    [MaxLength(150, ErrorMessage = "Description too long")]
    public string Description { get; set; } = string.Empty;
 
-   [Required]
-   [JsonIgnore]
-   public Loan Loan { get; set; } = null!;
    public int LoanId { get; set; }
+
 }

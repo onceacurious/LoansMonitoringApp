@@ -3,6 +3,7 @@ using LoansMonitoring.ClassLib.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoansMonitoring.API.Migrations
 {
     [DbContext(typeof(DbConnection))]
-    partial class DbConnectionModelSnapshot : ModelSnapshot
+    [Migration("20220813175216_UpdateProductTable")]
+    partial class UpdateProductTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
