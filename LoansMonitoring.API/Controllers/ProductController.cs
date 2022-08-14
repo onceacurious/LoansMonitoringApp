@@ -56,7 +56,7 @@ public class ProductController : ControllerBase
 		return Ok(result);
 	}
 	[HttpPatch("{id:int}")]
-	public async Task<ActionResult<ProductDto>> UpdateProduct(int id, ProductUpdateDeleteDto dto)
+	public async Task<ActionResult<ProductDto>> UpdateProduct(int id, ProductUpdateDto dto)
 	{
 		try
 		{

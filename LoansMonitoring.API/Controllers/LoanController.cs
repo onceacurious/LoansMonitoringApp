@@ -55,7 +55,7 @@ public class LoanController : ControllerBase
       return Ok(result);
    }
    [HttpPatch("{id:int}")]
-   public async Task<ActionResult<LoanDto>> UpdateLoan(int id, LoanUpdateDeleteDto dto)
+   public async Task<ActionResult<LoanDto>> UpdateLoan(int id, LoanUpdateDto dto)
    {
       try
       {

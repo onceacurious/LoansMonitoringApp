@@ -23,7 +23,7 @@ public class Application
    public DateTime DateReceived { get; set; }
 
    [Required]
-   public Receiver Receiver { get; set; } = null!;
+   public User Receiver { get; set; } = null!;
 
    [Required]
    public DateTime DateForwarded { get; set; }

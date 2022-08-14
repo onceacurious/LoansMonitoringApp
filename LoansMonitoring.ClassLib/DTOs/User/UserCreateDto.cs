@@ -1,13 +1,19 @@
-﻿namespace LoansMonitoring.ClassLib.DTOs.Receiver;
-public class ReceiverUpdateDto
+﻿
+namespace LoansMonitoring.ClassLib.DTOs.User;
+public class UserCreateDto
 {
-   public int Id { get; set; }
    [MaxLength(20)]
+   [Required]
    public string FirstName { get; set; } = null!;
+
    [MaxLength(20)]
+   [Required]
    public string LastName { get; set; } = null!;
+
    [MaxLength(20)]
+   [Required]
    public string MiddleName { get; set; } = null!;
+
    [MaxLength(20)]
-   public string? Position { get; set; }
+   public string Position { get; set; } = "staff";
 }

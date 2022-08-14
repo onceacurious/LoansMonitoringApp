@@ -15,5 +15,7 @@ public class Product
    [Required]
    [JsonIgnore]
    public Loan Loan { get; set; } = null!;
+
+   [Required]
    public int LoanId { get; set; }
 }

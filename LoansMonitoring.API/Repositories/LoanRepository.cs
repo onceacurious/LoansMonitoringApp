@@ -43,7 +43,7 @@ public class LoanRepository : ILoanRepository
       return loans;
    }
 
-   public async Task<Loan> UpdateLoan(int id, LoanUpdateDeleteDto dto)
+   public async Task<Loan> UpdateLoan(int id, LoanUpdateDto dto)
    {
       var loan = await _db.Loans.FindAsync(id);
       if (loan != null)

@@ -28,7 +28,7 @@ public class ProductRepository : IProductRepository
 		var prod = await _db.Products.Include(p => p.Loan).SingleOrDefaultAsync(p => p.Id == id);
 		return prod;
 	}
-	public async Task<Product> UpdateProduct(int id, ProductUpdateDeleteDto dto)
+	public async Task<Product> UpdateProduct(int id, ProductUpdateDto dto)
 	{
 		var prod = await _db.Products.FindAsync(id);
 		if (prod != null)

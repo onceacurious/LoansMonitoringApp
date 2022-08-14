@@ -1,5 +1,5 @@
 ﻿namespace LoansMonitoring.ClassLib.DTOs.Product;
-public class ProductUpdateDeleteDto
+public class ProductUpdateDto
 {
    [Required]
    [MaxLength(20, ErrorMessage = "Name too long")]

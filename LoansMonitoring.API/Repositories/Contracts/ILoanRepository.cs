@@ -7,6 +7,6 @@ public interface ILoanRepository
    Task<IEnumerable<Loan>> GetLoans();
    Task<Loan> GetLoan(int id);
    Task<Loan> CreateLoan(Loan loan);
-   Task<Loan> UpdateLoan(int id, LoanUpdateDeleteDto dto);
+   Task<Loan> UpdateLoan(int id, LoanUpdateDto dto);
    Task<Loan> DeleteLoan(int id);
 }
