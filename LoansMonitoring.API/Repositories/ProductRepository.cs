@@ -55,4 +55,12 @@ public class ProductRepository : IProductRepository
 
 		return null;
 	}
+
+	public async Task<List<Product>> GetProductByLoan(int loanId)
+	{
+		var products = await _db.Products
+			.Where(p => p.LoanId == loanId)
+			.ToListAsync();
+		return products;
+	}
 }

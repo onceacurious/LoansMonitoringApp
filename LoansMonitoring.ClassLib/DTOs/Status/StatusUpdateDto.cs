@@ -2,6 +2,11 @@
 public class StatusUpdateDto
 {
    public int Id { get; set; }
+
+   [MaxLength(20)]
+   [Required]
    public string Title { get; set; } = null!;
-   public string? Description { get; set; }
+
+   [MaxLength(150)]
+   public string Description { get; set; } = string.Empty;
 }

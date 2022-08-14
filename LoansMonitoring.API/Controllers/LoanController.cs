@@ -64,11 +64,7 @@ public class LoanController : ControllerBase
          {
             return NotFound();
          }
-         else
-         {
-            var result = loan.AsLoanDto();
-            return Ok(result);
-         }
+         return Ok(loan.AsLoanDto());
       }
       catch (Exception ex)
       {

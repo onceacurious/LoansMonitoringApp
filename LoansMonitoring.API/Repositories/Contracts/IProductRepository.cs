@@ -9,4 +9,5 @@ public interface IProductRepository
    Task<Product> GetProduct(int id);
    Task<Product> UpdateProduct(int id, ProductUpdateDto dto);
    Task<Product> DeleteProduct(int id);
+   Task<List<Product>> GetProductByLoan(int loanId);
 }

@@ -20,8 +20,6 @@ public class Client
    [MaxLength(20)]
    public string MiddleName { get; set; } = null!;
 
-
-
-
+   public ICollection<Application> Applications { get; set; } = null!;
 
 }

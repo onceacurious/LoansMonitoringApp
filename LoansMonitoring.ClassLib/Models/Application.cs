@@ -1,11 +1,15 @@
-﻿namespace LoansMonitoring.ClassLib.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace LoansMonitoring.ClassLib.Models;
 
 public class Application
 {
    public int Id { get; set; }
 
    [Required]
+   [JsonIgnore]
    public Client Client { get; set; } = null!;
+   public int ClientId { get; set; }
 
    [Required]
    public TransactionType TransactionType { get; set; } = null!;

@@ -8,7 +8,7 @@ public class DbConnection : DbContext
    public DbSet<Loan> Loans { get; set; } = null!;
    public DbSet<Product> Products { get; set; } = null!;
    public DbSet<User> Users { get; set; } = null!;
+   public DbSet<Status> Statuses { get; set; }
    //public DbSet<Client> Clients { get; set; }
-   //public DbSet<Status> Statuses { get; set; }
 
 }

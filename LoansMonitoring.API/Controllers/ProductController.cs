@@ -91,6 +91,12 @@ public class ProductController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
+	[HttpGet("loan/{loanId:int}")]
+	public async Task<ActionResult<List<ProductDto>>> GetProductByLoan(int loanId)
+	{
+		var prod = await _repo.GetProductByLoan(loanId);
+		return Ok(prod);
+	}
 
 
 }

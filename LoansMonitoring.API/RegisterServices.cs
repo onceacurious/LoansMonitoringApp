@@ -23,6 +23,6 @@ public static class RegisterServices
       builder.Services.AddScoped<ILoanRepository, LoanRepository>();
       builder.Services.AddScoped<IProductRepository, ProductRepository>();
       builder.Services.AddScoped<IUserRepository, UserRepository>();
-      //builder.Services.AddScoped<IClientRepository, ClientRepository>();
+      builder.Services.AddScoped<IStatusRepository, StatusRepository>();
    }
 }
