@@ -132,6 +132,33 @@ namespace LoansMonitoring.API.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("LoansMonitoring.ClassLib.Models.UserAuth", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("UserAuths");
+                });
+
             modelBuilder.Entity("LoansMonitoring.ClassLib.Models.Product", b =>
                 {
                     b.HasOne("LoansMonitoring.ClassLib.Models.Loan", "Loan")
@@ -143,9 +170,26 @@ namespace LoansMonitoring.API.Migrations
                     b.Navigation("Loan");
                 });
 
+            modelBuilder.Entity("LoansMonitoring.ClassLib.Models.UserAuth", b =>
+                {
+                    b.HasOne("LoansMonitoring.ClassLib.Models.User", "User")
+                        .WithOne("UserAuth")
+                        .HasForeignKey("LoansMonitoring.ClassLib.Models.UserAuth", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("LoansMonitoring.ClassLib.Models.Loan", b =>
                 {
                     b.Navigation("Prodcucts");
+                });
+
+            modelBuilder.Entity("LoansMonitoring.ClassLib.Models.User", b =>
+                {
+                    b.Navigation("UserAuth")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

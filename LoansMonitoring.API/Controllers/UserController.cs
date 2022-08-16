@@ -4,7 +4,7 @@ using LoansMonitoring.ClassLib.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoansMonitoring.API.Controllers;
-[Route("api/users")]
+[Route("api/")]
 [ApiController]
 public class UserController : ControllerBase
 {
@@ -15,7 +15,7 @@ public class UserController : ControllerBase
 		_repo = repo;
 	}
 
-	[HttpGet]
+	[HttpGet("users")]
 	public async Task<ActionResult<UserDto>> GetUsers()
 	{
 		try
@@ -33,7 +33,7 @@ public class UserController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpGet("{id:int}")]
+	[HttpGet("user/{id:int}")]
 	public async Task<ActionResult<UserDto>> GetUser(int id)
 	{
 		try
@@ -53,7 +53,7 @@ public class UserController : ControllerBase
 
 
 	}
-	[HttpPost]
+	[HttpPost("user")]
 	public async Task<ActionResult<UserDto>> AddUser([FromBody] UserCreateDto dto)
 	{
 		User user = new()
@@ -66,7 +66,7 @@ public class UserController : ControllerBase
 		await _repo.CreateUser(user);
 		return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user.AsUserDto());
 	}
-	[HttpDelete("{id:int}")]
+	[HttpDelete("user/{id:int}")]
 	public async Task<ActionResult<UserDto>> DeleteUser(int id)
 	{
 		try
@@ -84,7 +84,7 @@ public class UserController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpPatch("{id:int}")]
+	[HttpPatch("user/{id:int}")]
 	public async Task<ActionResult<UserDto>> UpdateUser(int id, UserUpdateDto dto)
 	{
 		try
@@ -102,7 +102,7 @@ public class UserController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpGet("{name}")]
+	[HttpGet("user/{name}")]
 	public async Task<ActionResult<UserDto>> GetUserByDisplayName(string name)
 	{
 		try

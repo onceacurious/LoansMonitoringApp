@@ -4,7 +4,7 @@ using LoansMonitoring.ClassLib.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoansMonitoring.API.Controllers;
-[Route("api/Status")]
+[Route("api/")]
 [ApiController]
 public class StatusController : ControllerBase
 {
@@ -15,7 +15,7 @@ public class StatusController : ControllerBase
 		_repo = repo;
 	}
 
-	[HttpGet]
+	[HttpGet("statuses")]
 	public async Task<ActionResult<IEnumerable<StatusDto>>> GetStatuses()
 	{
 		try
@@ -32,7 +32,7 @@ public class StatusController : ControllerBase
 			return StatusCode(StatusCodes.Status404NotFound, ex.Message);
 		}
 	}
-	[HttpGet("{id:int}")]
+	[HttpGet("status/{id:int}")]
 	public async Task<ActionResult<StatusDto>> GetStatus(int id)
 	{
 		try
@@ -50,7 +50,7 @@ public class StatusController : ControllerBase
 			return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
 		}
 	}
-	[HttpPost]
+	[HttpPost("status")]
 	public async Task<ActionResult<StatusDto>> AddStatus([FromBody] StatusAddDto dto)
 	{
 		try
@@ -68,7 +68,7 @@ public class StatusController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpPatch("{id:int}")]
+	[HttpPatch("status/{id:int}")]
 	public async Task<ActionResult<StatusDto>> UpdateStatus(int id, StatusUpdateDto dto)
 	{
 		try
@@ -86,7 +86,7 @@ public class StatusController : ControllerBase
 			return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
 		}
 	}
-	[HttpDelete("{id:int}")]
+	[HttpDelete("status/{id:int}")]
 	public async Task<ActionResult<StatusDto>> DeleteStatus(int id)
 	{
 		try

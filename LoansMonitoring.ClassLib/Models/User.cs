@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+﻿
 
 namespace LoansMonitoring.ClassLib.Models;
 public class User
@@ -24,12 +24,14 @@ public class User
    public string Position { get; set; } = "staff";
 
    [MaxLength(20)]
-   public string DisplayName
+   public string Username
    {
       get
       {
-         var name = FirstName + "_" + LastName;
+         var name = FirstName + "." + LastName;
          return _sWhiteSpace.Replace(name, "") + "_" + Id;
       }
    }
+
+   public UserAuth UserAuth { get; set; } = null!;
 }

@@ -4,7 +4,7 @@ using LoansMonitoring.ClassLib.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoansMonitoring.API.Controllers;
-[Route("api/products")]
+[Route("api/")]
 [ApiController]
 public class ProductController : ControllerBase
 {
@@ -14,7 +14,7 @@ public class ProductController : ControllerBase
 	{
 		_repo = repo;
 	}
-	[HttpGet]
+	[HttpGet("products")]
 	public async Task<ActionResult<ProductDto>> GetProducts()
 	{
 		try
@@ -32,7 +32,7 @@ public class ProductController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpPost]
+	[HttpPost("product")]
 	public async Task<ActionResult<ProductDto>> AddProduct([FromBody] ProductCreateDto dto)
 	{
 		Product product = new()
@@ -45,7 +45,7 @@ public class ProductController : ControllerBase
 		return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product.AsProductDto());
 	}
 
-	[HttpGet("{id:int}")]
+	[HttpGet("product/{id:int}")]
 	public async Task<ActionResult<ProductDto>> GetProduct(int id)
 	{
 		var result = await _repo.GetProduct(id);
@@ -55,7 +55,7 @@ public class ProductController : ControllerBase
 		}
 		return Ok(result);
 	}
-	[HttpPatch("{id:int}")]
+	[HttpPatch("product/{id:int}")]
 	public async Task<ActionResult<ProductDto>> UpdateProduct(int id, ProductUpdateDto dto)
 	{
 		try
@@ -73,7 +73,7 @@ public class ProductController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpDelete("{id:int}")]
+	[HttpDelete("product/{id:int}")]
 	public async Task<ActionResult<ProductDto>> DeleteProduct(int id)
 	{
 		try
@@ -91,7 +91,7 @@ public class ProductController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpGet("loan/{loanId:int}")]
+	[HttpGet("product_loan/{loanId:int}")]
 	public async Task<ActionResult<List<ProductDto>>> GetProductByLoan(int loanId)
 	{
 		var prod = await _repo.GetProductByLoan(loanId);

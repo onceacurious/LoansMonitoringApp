@@ -16,4 +16,5 @@ public class UserCreateDto
 
    [MaxLength(20)]
    public string Position { get; set; } = "staff";
+
 }

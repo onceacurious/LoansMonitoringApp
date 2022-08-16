@@ -12,10 +12,14 @@ public class Application
    public int ClientId { get; set; }
 
    [Required]
+   [JsonIgnore]
    public TransactionType TransactionType { get; set; } = null!;
+   public int TransactionTypeId { get; set; }
 
    [Required]
+   [JsonIgnore]
    public Status Status { get; set; } = null!;
+   public int StatusId { get; set; }
 
    [Required]
    public DateTime StatusTimestamp { get; set; } = DateTime.UtcNow;

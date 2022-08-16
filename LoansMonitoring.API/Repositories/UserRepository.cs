@@ -59,7 +59,7 @@ public class UserRepository : IUserRepository
 	public async Task<User> GetUserByDisplayName(string name)
 	{
 		var users = await _db.Users.ToListAsync();
-		var user = users.First(u => u.DisplayName == name);
+		var user = users.First(u => u.Username == name);
 		return user;
 	}
 }

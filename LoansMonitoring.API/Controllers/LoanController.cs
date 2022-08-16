@@ -4,7 +4,7 @@ using LoansMonitoring.ClassLib.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LoansMonitoring.API.Controllers;
-[Route("api/loans")]
+[Route("api/")]
 [ApiController]
 public class LoanController : ControllerBase
 {
@@ -14,7 +14,7 @@ public class LoanController : ControllerBase
    {
       _repository = repository;
    }
-   [HttpGet]
+   [HttpGet("loans")]
    public async Task<ActionResult<LoanDto>> GetLoans()
    {
       try
@@ -32,7 +32,7 @@ public class LoanController : ControllerBase
          return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
       }
    }
-   [HttpPost]
+   [HttpPost("loan")]
    public async Task<ActionResult<LoanDto>> AddLoan([FromBody] LoanAddDto dto)
    {
       Loan loan = new()
@@ -44,7 +44,7 @@ public class LoanController : ControllerBase
       await _repository.CreateLoan(loan);
       return CreatedAtAction(nameof(GetLoan), new { id = loan.Id }, loan.AsLoanDto());
    }
-   [HttpGet("{id:int}")]
+   [HttpGet("loan/{id:int}")]
    public async Task<ActionResult<LoanDto>> GetLoan(int id)
    {
       var result = await _repository.GetLoan(id);
@@ -54,7 +54,7 @@ public class LoanController : ControllerBase
       }
       return Ok(result);
    }
-   [HttpPatch("{id:int}")]
+   [HttpPatch("loan/{id:int}")]
    public async Task<ActionResult<LoanDto>> UpdateLoan(int id, LoanUpdateDto dto)
    {
       try
@@ -71,7 +71,7 @@ public class LoanController : ControllerBase
          return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
       }
    }
-   [HttpDelete("{id:int}")]
+   [HttpDelete("loan/{id:int}")]
    public async Task<ActionResult<LoanDto>> DeleteLoan(int id)
    {
       try

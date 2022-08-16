@@ -2,7 +2,9 @@
 using LoansMonitoring.ClassLib.DTOs.Loan;
 using LoansMonitoring.ClassLib.DTOs.Product;
 using LoansMonitoring.ClassLib.DTOs.Status;
+using LoansMonitoring.ClassLib.DTOs.TransactionType;
 using LoansMonitoring.ClassLib.DTOs.User;
+using LoansMonitoring.ClassLib.DTOs.UserAuth;
 
 namespace LoansMonitoring.ClassLib.Extensions;
 public static class DtosConvertion
@@ -48,6 +50,24 @@ public static class DtosConvertion
 
    //}
 
+   public static UserAuthDto AsUserAuthDto(this UserAuth obj)
+   {
+      return new UserAuthDto
+      {
+         Id = obj.Id,
+         Username = obj.User.Username,
+      };
+   }
+
+   public static TransactionDto AsTransactioDto(this TransactionType obj)
+   {
+      return new TransactionDto
+      {
+         Id = obj.Id,
+         Title = obj.Title,
+         Description = obj.Description
+      };
+   }
    public static StatusDto AsStatusDto(this Status obj)
    {
       return new StatusDto

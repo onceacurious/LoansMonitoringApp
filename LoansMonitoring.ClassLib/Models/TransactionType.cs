@@ -3,7 +3,6 @@ public class TransactionType
 {
    public int Id { get; set; }
 
-   [Display(Name = "Transaction Title")]
    [MaxLength(20)]
    [Required]
    public string Title { get; set; } = null!;
