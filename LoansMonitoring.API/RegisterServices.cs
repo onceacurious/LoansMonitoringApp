@@ -23,6 +23,5 @@ public static class RegisterServices
       builder.Services.AddScoped<IProductRepository, ProductRepository>();
       builder.Services.AddScoped<IUserRepository, UserRepository>();
       builder.Services.AddScoped<IStatusRepository, StatusRepository>();
-      builder.Services.AddScoped<IUserAuthRepository, UserAuthRepository>();
    }
 }

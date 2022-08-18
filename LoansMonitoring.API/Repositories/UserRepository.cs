@@ -6,7 +6,6 @@ namespace LoansMonitoring.API.Repositories;
 public class UserRepository : IUserRepository
 {
 	private readonly DbConnection _db;
-	public static User user = new();
 
 	public UserRepository(DbConnection db)
 	{
@@ -25,14 +24,14 @@ public class UserRepository : IUserRepository
 		return user;
 	}
 
-	public async Task<User> CreateUser(UserCreateDto dto)
+	public async Task<User> CreateUser(User user)
 	{
-		CreatePasswordHash(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+		CreatePasswordHash(user.Password, out byte[] passwordHash, out byte[] passwordSalt);
 		user.PasswordSalt = passwordSalt;
 		user.PasswordHash = passwordHash;
-		await _db.AddAsync(dto);
+		var result = await _db.AddAsync(user);
 		await _db.SaveChangesAsync();
-		return user;
+		return result.Entity;
 	}
 	public async Task<User> DeleteUser(int id)
 	{
@@ -74,4 +73,5 @@ public class UserRepository : IUserRepository
 			passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 		}
 	}
+
 }

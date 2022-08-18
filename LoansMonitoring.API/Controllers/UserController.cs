@@ -7,7 +7,7 @@ public class UserController : ControllerBase
 {
 	private readonly IUserRepository _repo;
 	/*
-	 Need to implement user Authentication and Authorization
+	 Still need to implement user Authentication, Authorization, and Refresh token
 	 */
 	public UserController(IUserRepository repo)
 	{
