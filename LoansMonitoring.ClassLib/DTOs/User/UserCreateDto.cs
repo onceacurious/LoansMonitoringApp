@@ -14,7 +14,8 @@ public class UserCreateDto
    [Required]
    public string MiddleName { get; set; } = null!;
 
-   [MaxLength(20)]
-   public string Position { get; set; } = "staff";
+   [MaxLength(15)]
+   [Required]
+   public string Password { get; set; } = null!;
 
 }

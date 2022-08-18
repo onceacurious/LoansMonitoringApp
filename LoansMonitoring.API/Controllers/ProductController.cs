@@ -1,7 +1,4 @@
-﻿using LoansMonitoring.API.Repositories.Contracts;
-using LoansMonitoring.ClassLib.DTOs.Product;
-using LoansMonitoring.ClassLib.Extensions;
-using Microsoft.AspNetCore.Mvc;
+﻿using LoansMonitoring.ClassLib.DTOs.Product;
 
 namespace LoansMonitoring.API.Controllers;
 [Route("api/")]

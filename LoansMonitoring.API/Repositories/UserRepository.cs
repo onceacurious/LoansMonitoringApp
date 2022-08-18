@@ -1,11 +1,12 @@
-﻿using LoansMonitoring.API.Repositories.Contracts;
-using LoansMonitoring.ClassLib.DTOs.User;
+﻿using LoansMonitoring.ClassLib.DTOs.User;
+using System.Security.Cryptography;
 
 namespace LoansMonitoring.API.Repositories;
 
 public class UserRepository : IUserRepository
 {
 	private readonly DbConnection _db;
+	public static User user = new();
 
 	public UserRepository(DbConnection db)
 	{
@@ -24,11 +25,14 @@ public class UserRepository : IUserRepository
 		return user;
 	}
 
-	public async Task<User> CreateUser(User user)
+	public async Task<User> CreateUser(UserCreateDto dto)
 	{
-		var result = await _db.AddAsync(user);
+		CreatePasswordHash(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+		user.PasswordSalt = passwordSalt;
+		user.PasswordHash = passwordHash;
+		await _db.AddAsync(dto);
 		await _db.SaveChangesAsync();
-		return result.Entity;
+		return user;
 	}
 	public async Task<User> DeleteUser(int id)
 	{
@@ -49,7 +53,6 @@ public class UserRepository : IUserRepository
 			user.FirstName = dto.FirstName;
 			user.MiddleName = dto.MiddleName;
 			user.LastName = dto.LastName;
-			user.Position = dto.Position;
 			await _db.SaveChangesAsync();
 			return user;
 		}
@@ -61,5 +64,14 @@ public class UserRepository : IUserRepository
 		var users = await _db.Users.ToListAsync();
 		var user = users.First(u => u.Username == name);
 		return user;
+	}
+
+	private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+	{
+		using (var hmac = new HMACSHA512())
+		{
+			passwordSalt = hmac.Key;
+			passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+		}
 	}
 }

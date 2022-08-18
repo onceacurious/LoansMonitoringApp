@@ -6,7 +6,7 @@ public interface IUserRepository
 {
    Task<IEnumerable<User>> GetUsers();
    Task<User> GetUser(int id);
-   Task<User> CreateUser(User user);
+   Task<User> CreateUser(UserCreateDto dto);
    Task<User> DeleteUser(int id);
    Task<User> UpdatUser(int id, UserUpdateDto dto);
    Task<User> GetUserByDisplayName(string name);

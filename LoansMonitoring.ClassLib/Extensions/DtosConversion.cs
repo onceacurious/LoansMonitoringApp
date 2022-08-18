@@ -4,10 +4,9 @@ using LoansMonitoring.ClassLib.DTOs.Product;
 using LoansMonitoring.ClassLib.DTOs.Status;
 using LoansMonitoring.ClassLib.DTOs.TransactionType;
 using LoansMonitoring.ClassLib.DTOs.User;
-using LoansMonitoring.ClassLib.DTOs.UserAuth;
 
 namespace LoansMonitoring.ClassLib.Extensions;
-public static class DtosConvertion
+public static class DtosConversion
 {
    //public static IEnumerable<ProductCategoryDto> ConvertToDto(this IEnumerable<ProductCategory> productCategories, IEnumerable<Product> products)
    //{
@@ -50,22 +49,15 @@ public static class DtosConvertion
 
    //}
 
-   public static UserAuthDto AsUserAuthDto(this UserAuth obj)
-   {
-      return new UserAuthDto
-      {
-         Id = obj.Id,
-         Username = obj.User.Username,
-      };
-   }
 
-   public static TransactionDto AsTransactioDto(this TransactionType obj)
+   public static TransactionDto AsTransactionDto(this TransactionType obj)
    {
       return new TransactionDto
       {
          Id = obj.Id,
          Title = obj.Title,
-         Description = obj.Description
+         Description = obj.Description,
+
       };
    }
    public static StatusDto AsStatusDto(this Status obj)
@@ -87,7 +79,8 @@ public static class DtosConvertion
          FirstName = obj.FirstName,
          LastName = obj.LastName,
          MiddleName = obj.MiddleName,
-         Position = obj.Position,
+         PasswordHash = obj.PasswordHash,
+         PasswordSalt = obj.PasswordSalt,
       };
    }
 

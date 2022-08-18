@@ -1,7 +1,6 @@
 ﻿namespace LoansMonitoring.ClassLib.DTOs.User;
 public class UserDto
 {
-   private static readonly Regex _sWhiteSpace = new(@"\s+");
 
    public int Id { get; set; }
 
@@ -20,18 +19,18 @@ public class UserDto
    public string MiddleName { get; set; } = null!;
 
    [MaxLength(20)]
-   public string Position { get; set; } = "staff";
-
-   [MaxLength(20)]
    public string Username
    {
       get
       {
-         var name = FirstName + "." + LastName;
-         return _sWhiteSpace.Replace(name, "") + "_" + Id;
+         var firstName = UsernameCoversion.Username(FirstName);
+         var name = firstName + "." + LastName.Trim();
+         return name + "_" + Id;
       }
    }
 
-   [Required]
-   public int UserAuthId { get; set; }
+   public byte[] PasswordHash { get; set; } = null!;
+
+   public byte[] PasswordSalt { get; set; } = null!;
+
 }

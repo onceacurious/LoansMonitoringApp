@@ -1,7 +1,4 @@
-﻿using LoansMonitoring.API.Repositories.Contracts;
-using LoansMonitoring.ClassLib.DTOs.User;
-using LoansMonitoring.ClassLib.Extensions;
-using Microsoft.AspNetCore.Mvc;
+﻿using LoansMonitoring.ClassLib.DTOs.User;
 
 namespace LoansMonitoring.API.Controllers;
 [Route("api/")]
@@ -9,7 +6,9 @@ namespace LoansMonitoring.API.Controllers;
 public class UserController : ControllerBase
 {
 	private readonly IUserRepository _repo;
-
+	/*
+	 Need to implement user Authentication and Authorization
+	 */
 	public UserController(IUserRepository repo)
 	{
 		_repo = repo;
@@ -61,7 +60,7 @@ public class UserController : ControllerBase
 			FirstName = dto.FirstName,
 			LastName = dto.LastName,
 			MiddleName = dto.MiddleName,
-			Position = dto.Position,
+
 		};
 		await _repo.CreateUser(user);
 		return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user.AsUserDto());

@@ -9,6 +9,5 @@ public class DbConnection : DbContext
    public DbSet<Product> Products { get; set; } = null!;
    public DbSet<User> Users { get; set; } = null!;
    public DbSet<Status> Statuses { get; set; } = null!;
-   public DbSet<UserAuth> UserAuths { get; set; } = null!;
 
 }

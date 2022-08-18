@@ -1,9 +1,6 @@
-﻿
-
-namespace LoansMonitoring.ClassLib.Models;
+﻿namespace LoansMonitoring.ClassLib.Models;
 public class User
 {
-   private static readonly Regex _sWhiteSpace = new(@"\s+");
    public int Id { get; set; }
 
    public Guid ObjectId { get; set; } = Guid.NewGuid();
@@ -21,17 +18,19 @@ public class User
    public string MiddleName { get; set; } = null!;
 
    [MaxLength(20)]
-   public string Position { get; set; } = "staff";
-
-   [MaxLength(20)]
    public string Username
    {
       get
       {
-         var name = FirstName + "." + LastName;
-         return _sWhiteSpace.Replace(name, "") + "_" + Id;
+         var firstName = UsernameCoversion.Username(FirstName);
+         var name = firstName + "." + LastName.Trim();
+         return name + "_" + Id;
       }
    }
 
-   public UserAuth UserAuth { get; set; } = null!;
+   public byte[] PasswordHash { get; set; } = null!;
+   public byte[] PasswordSalt { get; set; } = null!;
+
+   public UserBio UserBio { get; set; } = null!;
+
 }
