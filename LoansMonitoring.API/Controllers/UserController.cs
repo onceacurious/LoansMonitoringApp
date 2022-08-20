@@ -1,5 +1,8 @@
 ﻿using LoansMonitoring.API.Repositories;
 using LoansMonitoring.ClassLib.DTOs.User;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace LoansMonitoring.API.Controllers;
 [Route("api/")]
@@ -7,11 +10,12 @@ namespace LoansMonitoring.API.Controllers;
 public class UserController : ControllerBase
 {
 	private readonly IUserRepository _repo;
+	private readonly IConfiguration _configuration;
 
-
-	public UserController(IUserRepository repo)
+	public UserController(IUserRepository repo, IConfiguration configuration)
 	{
 		_repo = repo;
+		_configuration = configuration;
 	}
 
 	[HttpGet("users")]
@@ -128,19 +132,46 @@ public class UserController : ControllerBase
 		try
 		{
 			var user = await _repo.GetUserByDisplayName(dto.Username);
-			var verifyPass = UserRepository.VerifyPasswordHash(user.Password, user.PasswordHash, user.PasswordSalt)
-
-			; if (!verifyPass)
+			if (user == null)
+			{
+				return BadRequest("User not found");
+			}
+			var verifyPass = UserRepository.VerifyPasswordHash(user.Password, user.PasswordHash, user.PasswordSalt);
+			if (!verifyPass)
 			{
 				return BadRequest("Incorrect password");
 			}
-			return Ok("Congratulations");
+			string token = CreateToken(user);
+			return Ok(token);
 
 		}
-		catch (Exception)
+		catch (Exception ex)
 		{
-			return StatusCode(StatusCodes.Status400BadRequest, "User not found");
+			return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
 		}
 	}
 
+	private string CreateToken(User user)
+	{
+		List<Claim> claims = new()
+		{
+			new Claim(ClaimTypes.Name, user.Username)
+		};
+
+		var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+			_configuration.GetSection("AppSettings:Token").Value
+			));
+
+		var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+		var token = new JwtSecurityToken(
+			claims: claims,
+			expires: DateTime.Today.AddDays(1),
+			signingCredentials: cred
+
+			);
+		var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+
+		return jwt;
+	}
 }

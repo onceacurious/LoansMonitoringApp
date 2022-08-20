@@ -6,10 +6,12 @@ namespace LoansMonitoring.API.Repositories;
 public class UserRepository : IUserRepository
 {
 	private readonly DbConnection _db;
+	private readonly IConfiguration _configuration;
 
-	public UserRepository(DbConnection db)
+	public UserRepository(DbConnection db, IConfiguration configuration)
 	{
 		_db = db;
+		_configuration = configuration;
 	}
 
 	public async Task<IEnumerable<User>> GetUsers()
@@ -65,7 +67,7 @@ public class UserRepository : IUserRepository
 		return user;
 	}
 
-
+	//Authentication and Authorization
 	private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
 	{
 		using var hmac = new HMACSHA512();
@@ -80,5 +82,28 @@ public class UserRepository : IUserRepository
 		var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 		return computedHash.SequenceEqual(passwordHash);
 	}
+	//public static string CreateToken(User user)
+	//{
+	//	List<Claim> claims = new()
+	//	{
+	//		new Claim(ClaimTypes.Name, user.Username)
+	//	};
+
+	//	var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+	//		_configuration.GetSection("AppSettings:Token").Value
+	//		));
+
+	//	var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+	//	var token = new JwtSecurityToken(
+	//		claims: claims,
+	//		expires: DateTime.Today.AddDays(1),
+	//		signingCredentials: cred
+
+	//		);
+	//	var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+
+	//	return jwt;
+	//}
 
 }
