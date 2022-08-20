@@ -10,5 +10,4 @@ public interface IUserRepository
    Task<User> DeleteUser(int id);
    Task<User> UpdatUser(int id, UserUpdateDto dto);
    Task<User> GetUserByDisplayName(string name);
-
 }

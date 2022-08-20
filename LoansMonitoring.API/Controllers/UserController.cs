@@ -1,4 +1,5 @@
-﻿using LoansMonitoring.ClassLib.DTOs.User;
+﻿using LoansMonitoring.API.Repositories;
+using LoansMonitoring.ClassLib.DTOs.User;
 
 namespace LoansMonitoring.API.Controllers;
 [Route("api/")]
@@ -6,9 +7,8 @@ namespace LoansMonitoring.API.Controllers;
 public class UserController : ControllerBase
 {
 	private readonly IUserRepository _repo;
-	/*
-	 Still need to implement user Authentication, Authorization, and Refresh token
-	 */
+
+
 	public UserController(IUserRepository repo)
 	{
 		_repo = repo;
@@ -52,19 +52,7 @@ public class UserController : ControllerBase
 
 
 	}
-	[HttpPost("user")]
-	public async Task<ActionResult<UserDto>> AddUser([FromBody] UserCreateDto dto)
-	{
-		User user = new()
-		{
-			FirstName = dto.FirstName,
-			LastName = dto.LastName,
-			MiddleName = dto.MiddleName,
 
-		};
-		await _repo.CreateUser(user);
-		return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user.AsUserDto());
-	}
 	[HttpDelete("user/{id:int}")]
 	public async Task<ActionResult<UserDto>> DeleteUser(int id)
 	{
@@ -101,12 +89,12 @@ public class UserController : ControllerBase
 			return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 		}
 	}
-	[HttpGet("user/{name}")]
-	public async Task<ActionResult<UserDto>> GetUserByDisplayName(string name)
+	[HttpGet("user/{username}")]
+	public async Task<ActionResult<UserDto>> GetUserByDisplayName(string username)
 	{
 		try
 		{
-			var user = await _repo.GetUserByDisplayName(name);
+			var user = await _repo.GetUserByDisplayName(username);
 			if (user == null)
 			{
 				return BadRequest();
@@ -119,4 +107,40 @@ public class UserController : ControllerBase
 			return StatusCode(StatusCodes.Status400BadRequest, ex.Message);
 		}
 	}
+
+	//Register and Login User
+	[HttpPost("user/register")]
+	public async Task<ActionResult<UserDto>> AddUser([FromBody] UserCreateDto dto)
+	{
+		User user = new()
+		{
+			FirstName = dto.FirstName,
+			LastName = dto.LastName,
+			MiddleName = dto.MiddleName,
+
+		};
+		await _repo.CreateUser(user);
+		return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user.AsUserDto());
+	}
+	[HttpPost("user/login")]
+	public async Task<ActionResult<string>> Login(UserLoginDto dto)
+	{
+		try
+		{
+			var user = await _repo.GetUserByDisplayName(dto.Username);
+			var verifyPass = UserRepository.VerifyPasswordHash(user.Password, user.PasswordHash, user.PasswordSalt)
+
+			; if (!verifyPass)
+			{
+				return BadRequest("Incorrect password");
+			}
+			return Ok("Congratulations");
+
+		}
+		catch (Exception)
+		{
+			return StatusCode(StatusCodes.Status400BadRequest, "User not found");
+		}
+	}
+
 }
